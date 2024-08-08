@@ -1,17 +1,21 @@
 /* eslint-disable prettier/prettier */
 import { Category } from "../schema/book.schema";
-import { IsString, IsEnum } from 'class-validator';
+import { IsString, IsEnum, IsNotEmpty } from 'class-validator';
 
 export class CreateBookDTO {
+  @IsNotEmpty()
   @IsString()
   readonly title: string;
 
+  @IsNotEmpty()
   @IsString()
   readonly author: string;
 
   @IsString()
+  @IsNotEmpty()
   readonly description: string;
 
-  @IsEnum(Category)
+  @IsNotEmpty()
+  @IsEnum(Category, {message: "Invalid category"})
   readonly category: Category;
 }

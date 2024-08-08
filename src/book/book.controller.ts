@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Query } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './schema/book.schema';
 import { CreateBookDTO } from './dto/CreateBookDTO';
 import { UpdateBookDTO } from './dto/UpdateBookDTO';
+import { Query as ExpressQuery} from 'express-serve-static-core';
 
 @Controller('books')
 export class BookController {
@@ -12,8 +13,8 @@ export class BookController {
     ) {}
 
     @Get()
-    async getAllBooks(): Promise<Book[]> {
-        return this.bookService.findAll();
+    async getAllBooks(@Query() query: ExpressQuery): Promise<Book[]> {
+        return this.bookService.findAll(query);
     }
 
     @Post('create')
