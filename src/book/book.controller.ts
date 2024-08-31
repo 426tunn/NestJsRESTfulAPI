@@ -52,7 +52,7 @@ export class BookController {
     async deleteBook(
         @Param('id')
         id: string
-     ): Promise<string> {
+     ): Promise<{ deleted: boolean}> {
         return this.bookService.deleteById(id);
     }
 }

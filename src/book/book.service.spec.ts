@@ -151,6 +151,7 @@ describe('BookService', () => {
 
 
     describe('deleteById', () => {
+        const resp = {deleted: true}
         it('should delete a book by id', async () => {
             jest.spyOn(model, 'findByIdAndDelete').mockResolvedValue(mockBook)
 
@@ -158,7 +159,7 @@ describe('BookService', () => {
 
             expect(model.findByIdAndDelete).toHaveBeenCalledWith(mockBook._id)
 
-            expect(result).toEqual(mockBook)
+            expect(result).toEqual(resp)
         })
     })
 })

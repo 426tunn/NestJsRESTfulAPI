@@ -76,7 +76,7 @@ export class BookService {
         return Updatedbook
     }
 
-    async deleteById(id: string): Promise<string> {
+    async deleteById(id: string): Promise<{deleted: boolean}> {
 
         const isValidId = mongoose.Types.ObjectId.isValid(id);
 
@@ -88,6 +88,6 @@ export class BookService {
         if(!book) {
             throw new NotFoundException('Book not found');
         }
-        return 'Book deleted successfully'
+        return {deleted: true}
     }
 }
